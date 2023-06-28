@@ -1,0 +1,23 @@
+<html>
+	<body>
+		<table>
+
+		<tr>
+		<th>Name</th>
+		<th>Address</th>
+		<th>Phone</th>
+		</tr>
+
+		{% for o in or %}
+		<tr>
+		<td>{{o.name}}</td>
+		<td>{{o.address}}</td>
+		<td>{{o.phone}}</td>
+	<td><a href="{% url 'odetails' o.id %}">DETAILS</a></td>
+
+{% endfor %}
+
+		</table>
+	</body>
+
+<html>

@@ -1,0 +1,105 @@
+<html>
+
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+	$('#qty').change(function(){
+	var quantity=parseInt($('#qty').val())
+	var price=parseInt($('#price').val())
+	tot=quantity*price
+	$('#tot').val(tot)
+	})
+	})
+</script>
+
+	
+		<script type = "text/javascript">
+
+		function validation()
+		{
+			var num=/^[0-9]{10}$/;
+			var add=document.getElementById("add");
+			var qt=document.getElementById("qty");
+			var phone=document.getElementById("phone");
+			
+
+			if(add.value.length==0){
+				alert("enetr shipping address")
+				return false;
+			}
+			else if(qt.value.length==0){
+				alert("enter quantity")
+				return false;
+			}
+			else if(phone.value.length==0){
+				alert("enter phone")
+				return false;
+			}
+			else if(!phone.value.match(num)){
+				alert("enter valid phone")
+				phone.focus();
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+	</script>	
+			<body>
+<form method="post" action="{% url 'cartaction' %}" enctype="multipart/form-data">
+{% csrf_token %}
+		<table>
+
+		
+		
+		{% for c in cart %}
+		<input type="hidden" name="price" id="price" value="{{c.price}}">
+		<input type="hidden" name="productid" value="{{c.id}}">
+		<input type="hidden" name="stock" value="{{c.stock}}"> 
+		
+		<tr>
+		<td>productname</td>
+		<td>{{c.productname}}</td>
+		</tr>
+	
+		<tr>
+		<td>price</td>
+		<td>{{c.price}}</td>
+		</tr>
+		<tr>
+		<td>image</td>
+		<td><img src="{{c.image.url}}" height="50px" width="50px"></td>
+		</tr>
+		
+		
+		
+		<tr>
+		<td>shippingaddress</td>
+		<td><textarea name="shippingaddress" cols="5" rows="5" id="add"></textarea></td>
+		</tr>
+
+		<tr>
+		<td>quantity</td>
+		<td><input type="text" name="quantity" id='qty' ></td>
+		</tr>
+		
+		<tr>
+		<td>phone</td>
+		<td><input type="text" name="phone" id="phone"></td>
+		</tr>
+		
+		<tr>
+		<td>total</td>
+		<td><input type="text" name="total" id='tot' readonly="true" ></td>
+		</tr>
+
+		<tr>
+		<td></td>
+		<td><input type="submit" value="add" onclick="return validation()"></td>
+		</tr>
+		{% endfor %}
+		</table>
+</form>
+	</body>
+
+</html>

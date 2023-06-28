@@ -1,0 +1,62 @@
+<html>
+	<body>
+<form method="post" action="{% url 'placeorder' %}" enctype="multipart/form-data">{% csrf_token %}
+		<table>
+		
+		{% for c in ca %}
+		<tr>
+		<td>productname</td>
+		<td>{{c.productid.productname}}</td>
+		</tr>
+
+		<tr>
+		<td>image</td>
+		<td><img src="{{c.productid.image.url}}" height="50px" width="50px"></td>
+		</tr>
+
+		<tr>
+		<td>quantity</td>
+		<td>{{c.quantity}}</td>
+		</tr>
+		
+		<tr>
+		<td>total</td>
+		<td>{{c.totalprice}}</td>
+		</tr>
+		
+		
+		<td><input type="checkbox" name="checkbox" value="{{c.id}}"></td>
+		
+
+<td><a href="{% url 'cartdelete' c.id %}">DELETE</a></td>
+{% empty %}
+<td cols span="5">nothing to display</td>
+		
+		{% endfor %}
+		
+
+		<tr>
+		<td>phone</td>
+		<td><input type="text" name="phone"></td>
+		</tr>
+
+		<tr>
+		<td>customername</td>
+		<td><input type="text" name="customername"></td>
+		</tr>
+
+		<tr>
+		<td>shippingaddress</td>
+		<td><textarea name="shippingaddress" cols="5" rows="5"></textarea></td>
+		</tr>
+
+		
+
+		<tr>
+		<td></td>
+		<td><input type="submit"  value="submit"></td>
+		</tr>
+		</table>
+</form>
+	</body>
+</html>

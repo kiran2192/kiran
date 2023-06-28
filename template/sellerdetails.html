@@ -1,0 +1,70 @@
+<html>
+	<body>
+		<table>
+{% for v in de %}
+		
+		<tr>
+		<th>NAME</th>
+		<td>{{v.name}}</td>
+		</tr>
+
+		<tr>
+		<th>ADDRESS</th>
+		<td>{{v.address}}</td>
+		</tr>
+
+		<tr>
+		<th>GENDER</th>
+		<td>{{v.gender}}</td>
+		</tr>
+
+		<tr>
+		<th>DOB</th>
+		<td>{{v.dob}}</td>
+		</tr>
+
+		<tr>
+		<th>PHONE</th>
+		<td>{{v.phone}}</td>
+		</tr>
+
+		<tr>
+		<th>COUNTRY</th>
+		<td>{{v.country}}</td>
+		</tr>
+
+		<tr>
+		<th>USERNAME</th>
+		<td>{{v.username}}</td>
+		</tr>
+		
+		<tr>
+		<th>PASSWORD</th>
+		<td>{{v.password}}</td>
+		</tr>
+
+		<tr>
+		<th>STATUS</th>
+		<td>{{v.status}}</td>
+		</tr>
+
+
+{% if v.status == 'pending' %}
+<td></td>
+<td><a href="{% url 'approve' v.id %}">APPROVE</a></td>
+{% endif %}
+
+{% if v.status == 'pending' %}
+<tr>
+<td></td>
+<td><a href="{% url 'reject' v.id %}">REJECT</a></td>
+</tr>
+{% endif %}
+
+
+{% endfor %}
+
+
+		</table>
+	</body>
+</html>

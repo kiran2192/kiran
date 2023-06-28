@@ -1,0 +1,59 @@
+<html>
+	<body>
+		<table>
+		
+		{% for o in ord %}
+
+		<tr>
+		<td>name</td>
+		<td>{{o.name}}</td>
+		</tr>
+
+		<tr>
+		<td>orderdate</td>
+		<td>{{o.orderdate}}</td>
+		</tr>
+
+		<tr>
+		<td>ordertime</td>
+		<td>{{o.ordertime}}</td>
+		</tr>
+
+		{% if o.status == 'pending' %}
+		<td><a href="{% url 'cancelorder' o.id %}">CancelOrder</a></td>
+		{% endif %}
+
+		{% if o.status == 'approved' %}
+		<td><a href="{% url 'viewtrackingdetail' o.id %}">Viewtracking details</a></td>
+		{% endif %}
+		{% endfor %}
+		
+	
+		{% for c in or %}
+		<tr>
+		<td>image</td>
+		<td><img src="{{c.productid.image.url}}" height="50px" width="50px"></td>
+		</tr>
+		
+		<tr>
+		<td>quantity</td>
+		<td>{{c.quantity}}</td>
+		</tr>
+
+		<tr>
+		<td>total</td>
+		<td>{{c.totalprice}}</td>
+		</tr>
+		
+
+		
+		{% endfor %}
+		{% for o in ord %}
+		<td></td>
+		<td>{{o.status}}</td>
+		{% endfor %}
+
+	
+		</table>
+	</body>
+</html>

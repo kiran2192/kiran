@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'searchcategoryaction' %}">{% csrf_token %}
+        <table>
+            <tr>
+                <td>category</td>
+                <td><select name="category">
+                    <option value="">--select--</option>
+                    {% for c in ct %}
+        
+                    <option value="{{c.id}}">{{c.cname}}</option>
+                    {% endfor %}
+
+                </select></td>
+            </tr>
+           
+            <tr>
+                <td>price</td>
+                <td><input type="text" name="price"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="submit"></td>
+            </tr>
+           
+        </table>
+        </form>
+    </body>
+</html>

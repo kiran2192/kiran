@@ -1,0 +1,135 @@
+<html>
+	<body>
+		<script type = "text/javascript" >
+			function validation(){
+
+				var alpha=/^[a-zA-Z]+$/;
+				var num=/^[0-9]+$/;
+				var ph=/^[0-9]{10}$/;
+
+				var name=document.getElementById("name");
+				var address=document.getElementById("address");
+				var gender=document.myform.gender;
+				var dob=document.getElementById("dob");
+				var phone=document.getElementById("phone");
+				var country=document.getElementById("country");
+				var username=document.getElementById("username");
+				var password=document.getElementById("password");
+
+				if (name.value.length ==0 ){
+					alert("enter a  name")
+					return false;
+				}
+				else if(!name.value.match(alpha))
+				{
+					alert("enter a valid name")
+					return false;
+				}
+				else if(address.value.length==0){
+					alert("enter a address")
+					return false;
+				}
+				else if(gender[0].checked == false && gender[1].checked == false){
+					alert("enter a valid gender")
+					return false;
+				}
+				else if(phone.value.length==0){
+					alert("enter a phone")
+					return false;
+				}
+				else if(!phone.value.match(ph)){
+					alert("enter valid a phone")
+					return false;
+				}
+				else if(country.value.length==0){
+					alert("enter a country")
+					return false;
+				}
+				else if(username.value.length==0){
+					alert("enter a username")
+					return false;
+				}
+				else if(password.value.length==0){
+					alert("enter a password")
+					return false;
+				}
+				else{
+					return true;
+				}
+
+
+			}
+
+
+			</script>
+
+<form method="post" action="{% url 'registeraction' %}" name="myform">
+				{% csrf_token %}
+		<table>
+
+		<tr>
+		<td>name</td>
+		<td><input type="text" name="name" id="name"></td>
+		</tr>
+
+		<tr>
+		<td>address</td>
+		<td><textarea name="address" cols="5" id="address" rows="5"></textarea></td>
+		</tr>
+
+		<tr>
+		<td>gender</td>
+		<td><input type="radio" name="gender" id="gender" value="male">MALE
+		<input type="radio" name="gender" value="female">FEMALE</td>
+		</tr>
+
+		<tr>
+		<td>dob</td>
+		<td><input type="date" name="dob" id="dob"></td>
+		</tr>
+
+		<tr>
+		<td>phone</td>
+		<td><input type="text" name="phone" id="phone"></td>
+		</tr>
+
+		<tr>
+		<td>country</td>
+		<td><select name="country" id="country">
+		<option value="">--select--</otpion>
+		<option value="India">India</option>
+		<option value="China">China</option>
+		<option value="Pakistan">Pakistan</option>
+		</select></td>
+		</tr>
+
+		<tr>
+		<td>username</td>
+		<td><input type="text" name="username" id="username"></td>
+		</tr>
+
+		<tr>
+		<td>password</td>
+		<td><input type="password" name="password" id="password"></td>
+		</tr>
+
+		<tr>
+		<td></td>
+		<td><input type="submit" value="Register" onclick="return validation()"></td>
+		</tr>
+
+
+		
+
+		</table>
+</form>
+	</body>
+
+{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert('{{msg}}')
+	</script>
+	{% endfor %}
+{% endif %}
+</html>

@@ -1,0 +1,102 @@
+<html>
+	<body>
+		<script type ="text/javascript">
+		function validation(){
+			var alpha=/^[a-zA-Z]+$/;
+			var n=document.getElementById("pname");
+			var image=document.getElementById("image");
+			var price=document.getElementById("price");
+			var stock=document.getElementById("stock");
+			var c=document.getElementById("cid");
+			var d=document.getElementById("details");
+
+			if(n.value.length==0){
+				alert("enter a name")
+				return false;
+			}
+			else if(!n.value.match(alpha)){
+				alert("enter a valid name")
+				return false;
+			}
+			else if(image.value.length==0){
+				alert("upload image")
+				return false;
+			}
+			else if(price.value.length==0){
+				alert("enter price")
+				return false;
+			}
+			else if(stock.value.length==0){
+				alert("enter stock")
+				return false;
+			}
+			else if(c.value.length==0){
+				alert("enter categoryid")
+				return false;
+			}
+			else if(d.value.length==0){
+				alert("enter details")
+				return false;
+			}
+			else{
+				return true;
+			}
+
+
+		}
+		</script>
+<form method="post" action="{% url 'productaction' %}"enctype="multipart/form-data" >{% csrf_token %}
+		<table>
+
+		<tr>
+		<td>productname</td>
+		<td><input type="text" name="productname" id="pname"></td>
+		<tr>
+
+		<tr>
+		<td>image</td>
+		<td><input type="file" name="image" id="image"></td>
+		</tr>
+
+		<tr>
+		<td>price</td>
+		<td><input type="text" name="price" id="price"></td>
+		</tr>
+
+		<tr>
+		<td>stock</td>
+		<td><input type="text" name="stock" id="stock"></td>
+		</tr>
+
+		<tr>
+		<td>categoryid</td>
+		<td><select name="categoryid" id="cid">
+		<option value="">--select--</option>
+		{% for c in cat %}
+		<option value="{{c.id}}">{{c.cname}}</option>
+		{% endfor %}
+		</select>
+		</td>
+		</tr>
+		
+		<tr>
+		<td>details</td>
+		<td><textarea name = "details" cols="5" rows="5" id="details"></textarea></td>
+		</tr>
+
+		<tr>
+		<td></td>
+		<td><input type="submit" value="submit" onclick="return validation()"></td>
+		</tr>
+
+		</table>
+</form>
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+	<script>
+	alert('{{msg}}')
+	</script>
+	{% endfor %}
+{% endif %}
+</html>
